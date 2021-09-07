@@ -20,6 +20,7 @@ import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.example.fooddelivery.ui.customviews.idcard.IdCardModel
 import com.example.fooddelivery.ui.customviews.topbar.TopBarLists
 import com.example.fooddelivery.ui.customviews.topbar.TopBarModel
@@ -39,7 +40,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background) {
                     mainView {
-                        topBar(list = TopBarLists.topBarListMainView)
+                        topBarView(list = TopBarLists.topBarListMainView)
                     }
                 }
             }
@@ -60,7 +61,7 @@ fun mainView(content : @Composable() ColumnScope.() -> Unit){
 }
 
 @Composable
-fun topBar(list : List<TopBarModel>){
+fun topBarView(list : List<TopBarModel>){
     // 메모리 관리가 들어간 lazyColumn
     LazyRow(
         verticalAlignment = Alignment.CenterVertically,
@@ -69,18 +70,26 @@ fun topBar(list : List<TopBarModel>){
         modifier = Modifier
             .fillMaxWidth()
             .background(Color.Black)
+            .padding(vertical = 10.dp)
     ){
         items(list){ model ->
-            Text(
-                text = model.itemNative,
-                color = Color.Red,
-                maxLines = 1,
-                fontFamily = FontFamily(Font(R.font.kotra_bold)),
-                modifier = Modifier
-                    .background(Color.White)
-            )
+            topBarItemView(model = model)
         }
     }
+}
+
+@Composable
+fun topBarItemView(model : TopBarModel){
+    Text(
+        text = model.itemNative,
+        color = Color.Red,
+        maxLines = 1,
+        fontSize = 25.sp,
+        fontFamily = FontFamily(Font(R.font.kotra_bold)),
+        modifier = Modifier
+            .background(Color.White)
+            .padding(horizontal = 15.dp)
+    )
 }
 
 @Composable
@@ -130,7 +139,7 @@ fun idCard(model : IdCardModel, onClick : () -> Unit){
 fun DefaultPreview() {
     FoodDeliveryTheme {
         mainView{
-
+            topBarView(list = TopBarLists.topBarListMainView)
         }
     }
 }

@@ -1,19 +1,13 @@
 package com.example.fooddelivery
 
 import android.os.Bundle
-import android.util.Log
-import android.view.Window
-import android.view.WindowManager
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.lazy.rememberStateOfItemsProvider
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -22,6 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fooddelivery.ui.customviews.idcard.IdCardModel
@@ -79,7 +75,7 @@ fun topBar(list : List<TopBarModel>){
                 text = model.itemNative,
                 color = Color.Red,
                 maxLines = 1,
-                style = MaterialTheme.typography
+                fontFamily = FontFamily(Font(R.font.kotra_bold)),
                 modifier = Modifier
                     .background(Color.White)
             )

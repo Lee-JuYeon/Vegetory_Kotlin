@@ -3,6 +3,7 @@ package com.example.fooddelivery
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -16,6 +17,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Paint
+import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
+import androidx.compose.ui.graphics.nativeCanvas
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
@@ -69,7 +73,7 @@ fun topBarView(list : List<TopBarModel>){
         contentPadding = PaddingValues(horizontal = 0.dp),
         modifier = Modifier
             .fillMaxWidth()
-            .background(Color.Black)
+            .background(Color.White)
             .padding(vertical = 10.dp)
     ){
         items(list){ model ->
@@ -80,16 +84,28 @@ fun topBarView(list : List<TopBarModel>){
 
 @Composable
 fun topBarItemView(model : TopBarModel){
-    Text(
-        text = model.itemNative,
-        color = Color.Red,
-        maxLines = 1,
-        fontSize = 25.sp,
-        fontFamily = FontFamily(Font(R.font.kotra_bold)),
-        modifier = Modifier
-            .background(Color.White)
-            .padding(horizontal = 15.dp)
-    )
+    Box(
+        contentAlignment = Alignment.TopStart
+    ){
+        Text(
+            text = model.itemNative,
+            color = Color.White,
+            maxLines = 1,
+            fontSize = 25.sp,
+            fontFamily = FontFamily(Font(R.font.kotra_bold)),
+            modifier = Modifier
+                .padding(horizontal = 15.dp)
+        )
+        Text(
+            text = model.itemNative,
+            color = Color.Black,
+            maxLines = 1,
+            fontSize = 24.sp,
+            fontFamily = FontFamily(Font(R.font.kotra_bold)),
+            modifier = Modifier
+                .padding(horizontal = 15.dp)
+        )
+    }
 }
 
 @Composable

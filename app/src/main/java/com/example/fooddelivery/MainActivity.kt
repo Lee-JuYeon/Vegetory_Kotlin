@@ -32,6 +32,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fooddelivery.ui.customviews.dock.DockModel
+import com.example.fooddelivery.ui.customviews.dock.dockView
 import com.example.fooddelivery.ui.customviews.idcard.IdCardModel
 import com.example.fooddelivery.ui.customviews.topbar.TopBarLists
 import com.example.fooddelivery.ui.customviews.topbar.TopBarModel
@@ -118,62 +119,6 @@ fun topBarItemView(model : TopBarModel){
     }
 }
 
-@Composable
-fun dockView(list : List<DockModel>){
-// 메모리 관리가 들어간 lazyColumn
-    LazyRow(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Center,
-        contentPadding = PaddingValues(horizontal = 0.dp),
-        modifier = Modifier
-            .background(Color.White)
-            .padding(vertical = 10.dp)
-    ){
-        items(list){ model ->
-            dockItemView(
-                model = model,
-                onClick = { dockModel ->
-                    when(dockModel.itemEnglishTitle){
-                        Strings.DOCK_MENU -> {
-                            Log.e("mException", "click : DOCK_MENU")
-                        }
-                        Strings.DOCK_RECIPE -> {
-                            Log.e("mException", "click : DOCK_RECIPE")
-                        }
-                        Strings.DOCK_STORY -> {
-                            Log.e("mException", "click : DOCK_STORY")
-                        }
-                        Strings.DOCK_PROFILE -> {
-                            Log.e("mException", "click : DOCK_PROFILE")
-                        }
-                    }
-                }
-            )
-        }
-    }
-}
-@Composable
-fun dockItemView(model : DockModel, onClick: (model : DockModel) -> Unit){
-    Card(
-        modifier = Modifier
-            .size(60.dp)
-            .padding(5.dp),
-        shape = CircleShape,
-        elevation = 5.dp
-    ){
-        Image(
-            painter = painterResource(id = model.itemImage),
-            contentDescription = "",
-            contentScale = ContentScale.Crop,
-            modifier = Modifier
-                .fillMaxSize()
-                .background(Color.Red)
-                .clickable {
-                    onClick(model)
-                }
-        )
-    }
-}
 
 @Composable
 fun idCard(model : IdCardModel, onClick : () -> Unit){

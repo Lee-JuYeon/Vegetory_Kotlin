@@ -15,7 +15,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.fooddelivery.ui.customviews.dock.dockView
+import com.example.fooddelivery.ui.customviews.dock.DockView
 import com.example.fooddelivery.ui.customviews.idcard.IdCardModel
 import com.example.fooddelivery.ui.customviews.topbar.TopBarView
 import com.example.fooddelivery.ui.theme.FoodDeliveryTheme
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
                     color = MaterialTheme.colors.background) {
                     mainView {
                         TopBarView(list = Lists.topBarListMainView)
-                        dockView(list = Lists.dockList)
+                        DockView(list = Lists.dockList)
                     }
                 }
             }

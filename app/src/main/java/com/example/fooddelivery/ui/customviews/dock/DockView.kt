@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
 import com.example.fooddelivery.util.strings.Strings
 
 @Composable
-fun dockView(list : List<DockModel>){
+fun DockView(list : List<DockModel>){
 // 메모리 관리가 들어간 lazyColumn
     LazyRow(
         verticalAlignment = Alignment.CenterVertically,
@@ -26,7 +26,7 @@ fun dockView(list : List<DockModel>){
             .padding(vertical = 10.dp)
     ){
         items(list){ model ->
-            dockItemView(
+            DockItemView(
                 model = model,
                 onClick = { dockModel ->
                     when(dockModel.itemEnglishTitle){

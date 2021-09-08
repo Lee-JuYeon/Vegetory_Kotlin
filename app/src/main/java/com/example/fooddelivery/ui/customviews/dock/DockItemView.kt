@@ -16,7 +16,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun dockItemView(model : DockModel, onClick: (model : DockModel) -> Unit){
+fun DockItemView(model : DockModel, onClick: (model : DockModel) -> Unit){
     Card(
         modifier = Modifier
             .size(60.dp)

@@ -2,6 +2,7 @@ package com.example.fooddelivery.ui.customviews.dock
 
 import android.util.Log
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -11,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import com.example.fooddelivery.util.strings.Strings
 
@@ -22,8 +25,12 @@ fun DockView(list : List<DockModel>){
         horizontalArrangement = Arrangement.Center,
         contentPadding = PaddingValues(horizontal = 0.dp),
         modifier = Modifier
-            .background(Color.White)
-            .padding(vertical = 10.dp)
+            .background(Color.Yellow)
+            .border(
+                width = 1.dp,
+                color = Color.Black,
+                shape = RectangleShape
+            )
     ){
         items(list){ model ->
             DockItemView(

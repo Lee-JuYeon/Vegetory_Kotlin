@@ -1,17 +1,11 @@
 package com.example.fooddelivery
 
 import android.os.Bundle
-import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -19,26 +13,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Paint
-import androidx.compose.ui.graphics.drawscope.drawIntoCanvas
-import androidx.compose.ui.graphics.nativeCanvas
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
-import com.example.fooddelivery.ui.customviews.dock.DockModel
 import com.example.fooddelivery.ui.customviews.dock.dockView
 import com.example.fooddelivery.ui.customviews.idcard.IdCardModel
-import com.example.fooddelivery.ui.customviews.topbar.TopBarLists
-import com.example.fooddelivery.ui.customviews.topbar.TopBarModel
+import com.example.fooddelivery.ui.customviews.topbar.TopBarView
 import com.example.fooddelivery.ui.theme.FoodDeliveryTheme
 import com.example.fooddelivery.util.lists.Lists
-import com.example.fooddelivery.util.strings.Strings
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,7 +35,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background) {
                     mainView {
-                        topBarView(list = Lists.topBarListMainView)
+                        TopBarView(list = Lists.topBarListMainView)
                         dockView(list = Lists.dockList)
                     }
                 }
@@ -75,49 +56,8 @@ fun mainView(content : @Composable() ColumnScope.() -> Unit){
     )
 }
 
-@Composable
-fun topBarView(list : List<TopBarModel>){
-    // 메모리 관리가 들어간 lazyColumn
-    LazyRow(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.Start,
-        contentPadding = PaddingValues(horizontal = 0.dp),
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.White)
-            .padding(vertical = 10.dp)
-    ){
-        items(list){ model ->
-            topBarItemView(model = model)
-        }
-    }
-}
 
-@Composable
-fun topBarItemView(model : TopBarModel){
-    Box(
-        contentAlignment = Alignment.TopStart
-    ){
-        Text(
-            text = model.itemNative,
-            color = Color.White,
-            maxLines = 1,
-            fontSize = 25.sp,
-            fontFamily = FontFamily(Font(R.font.kotra_bold)),
-            modifier = Modifier
-                .padding(horizontal = 15.dp)
-        )
-        Text(
-            text = model.itemNative,
-            color = Color.Black,
-            maxLines = 1,
-            fontSize = 24.sp,
-            fontFamily = FontFamily(Font(R.font.kotra_bold)),
-            modifier = Modifier
-                .padding(horizontal = 15.dp)
-        )
-    }
-}
+
 
 
 @Composable
@@ -167,7 +107,7 @@ fun idCard(model : IdCardModel, onClick : () -> Unit){
 fun DefaultPreview() {
     FoodDeliveryTheme {
         mainView{
-            topBarView(list = Lists.topBarListMainView)
+            TopBarView(list = Lists.topBarListMainView)
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.fooddelivery.ui.customviews.topbar
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Text
@@ -14,7 +15,10 @@ import androidx.compose.ui.unit.sp
 import com.example.fooddelivery.R
 
 @Composable
-fun TopBarItemView(model : TopBarModel){
+fun TopBarItemView(
+    model : TopBarModel,
+    setOnClick : (model : TopBarModel) -> Unit
+){
     Box(
         contentAlignment = Alignment.TopStart
     ){
@@ -35,6 +39,9 @@ fun TopBarItemView(model : TopBarModel){
             fontFamily = FontFamily(Font(R.font.kotra_bold)),
             modifier = Modifier
                 .padding(horizontal = 15.dp)
+                .clickable {
+                    setOnClick(model)
+                }
         )
     }
 }

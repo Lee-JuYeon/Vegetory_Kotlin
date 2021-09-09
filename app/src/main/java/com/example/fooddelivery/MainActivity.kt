@@ -54,6 +54,7 @@ fun MainView(){
                 setList = Lists.topBarListMainView,
                 setHeight =  this@BoxWithConstraints.maxHeight / 20 * 1
             )
+
             FrameLayout(
                 setHeight = this@BoxWithConstraints.maxHeight / 20 * 17
             ) {

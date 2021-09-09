@@ -10,6 +10,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.example.fooddelivery.util.strings.Strings
 
 @Composable
 fun TopBarView(
@@ -27,7 +28,25 @@ fun TopBarView(
             .background(Color.White)
     ){
         items(setList){ model ->
-            TopBarItemView(model = model)
+            TopBarItemView(
+                model = model,
+                setOnClick = { topBarModel ->
+                    when(topBarModel.itemEnglish){
+                        Strings.TOPBAR_NOTICE -> {
+
+                        }
+                        Strings.TOPBAR_SETTING -> {
+
+                        }
+                        Strings.TOPBAR_SUBSCRIBE -> {
+
+                        }
+                        Strings.TOPBAR_UNSUBSCRIBE -> {
+
+                        }
+                    }
+                }
+            )
         }
     }
 }

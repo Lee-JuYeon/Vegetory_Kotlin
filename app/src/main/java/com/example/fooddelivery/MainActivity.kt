@@ -27,21 +27,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             FoodDeliveryTheme {
-//                window.setLayout(
-//                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN,
-//                    WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN
-//                )
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.background) {
-                    mainView {
-                        TopBarView(list = Lists.topBarListMainView)
-                        FrameLayout {
-
-                        }
-                        DockView(list = Lists.dockList)
-                    }
+                    color = MaterialTheme.colors.error
+                ) {
+                    MainView()
                 }
             }
         }
@@ -49,20 +40,33 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun mainView(content : @Composable() ColumnScope.() -> Unit){
-    Column(
-        verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colors.primaryVariant),
-        content =  content
-    )
+fun MainView(){
+    BoxWithConstraints {
+        this.constraints.maxHeight
+        Column(
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier
+                .fillMaxSize()
+                .background(MaterialTheme.colors.primaryVariant)
+        ){
+            TopBarView(
+                setList = Lists.topBarListMainView,
+                setHeight =  this@BoxWithConstraints.maxHeight / 20 * 1
+            )
+            FrameLayout(
+                setHeight = this@BoxWithConstraints.maxHeight / 20 * 17
+            ) {
+
+
+            }
+            DockView(
+                setList = Lists.dockList,
+                setHeight = this@BoxWithConstraints.maxHeight / 20 * 2
+            )
+        }
+    }
 }
-
-
-
-
 
 @Composable
 fun idCard(model : IdCardModel, onClick : () -> Unit){
@@ -78,7 +82,7 @@ fun idCard(model : IdCardModel, onClick : () -> Unit){
             horizontalArrangement = Arrangement.Start,
             modifier = Modifier
                 .size(width = 400.dp, height = 100.dp)
-                .background(MaterialTheme.colors.primaryVariant)
+                .background(MaterialTheme.colors.error)
         ) {
 //            Image(
 //                modifier = Modifier.requiredSize(150.dp) // parent의 사이즈에 잘린다면 requireSize로 뚫어버릴 수 잇음.
@@ -110,8 +114,6 @@ fun idCard(model : IdCardModel, onClick : () -> Unit){
 @Composable
 fun DefaultPreview() {
     FoodDeliveryTheme {
-        mainView{
-            TopBarView(list = Lists.topBarListMainView)
-        }
+        MainView()
     }
 }

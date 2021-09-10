@@ -118,3 +118,11 @@ fun DefaultPreview() {
         MainView()
     }
 }
+
+/*
+클린 아키텍쳐 참고 블로그
+https://ddangeun.tistory.com/138?category=948675
+
+mvvm repository 참고 블로그
+
+ */

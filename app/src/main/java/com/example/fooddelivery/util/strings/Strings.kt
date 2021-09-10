@@ -11,4 +11,8 @@ object Strings {
     const val TOPBAR_SUBSCRIBE = "SUBSCRIBE"
     const val TOPBAR_UNSUBSCRIBE = "UNSUBSCRIBE"
 
+    const val FRAG_MENU = "VIEW_MENU"
+    const val FRAG_PROFILE = "VIEW_PROFILE"
+    const val FRAG_STORY = "VIEW_STORY"
+
 }

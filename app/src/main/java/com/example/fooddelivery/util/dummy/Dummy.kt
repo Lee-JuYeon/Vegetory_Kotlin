@@ -2,6 +2,7 @@ package com.example.fooddelivery.util.dummy
 
 import com.example.fooddelivery.R
 import com.example.fooddelivery.models.MainProductModel
+import com.example.fooddelivery.models.ProductCAMModel
 import com.example.fooddelivery.models.UserModel
 
 object Dummy {
@@ -15,7 +16,24 @@ object Dummy {
         userSafe = false,
         userUID = "uid 1111",
         userPosts = listOf("postUID1", "postUID2", "postUID3", "postUID4","postUID5"),
-        userCAM = listOf("Carrot cam1", "Carrot cam2", "Carrot cam3", "Carrot cam4"),
+        userCAM = listOf(
+            ProductCAMModel(
+                videoPath = R.drawable.image_password,
+                videoIsWorking = false
+            ),
+            ProductCAMModel(
+                videoPath = R.drawable.image_email,
+                videoIsWorking = true
+            ),
+            ProductCAMModel(
+                videoPath = R.drawable.image_password,
+                videoIsWorking = false
+            ),  ProductCAMModel(
+                videoPath = R.drawable.image_email,
+                videoIsWorking = true
+            )
+
+        ),
         userMainProduct = listOf<MainProductModel>(
             MainProductModel("당근", R.drawable.image_email),
             MainProductModel("오이", R.drawable.image_email),

@@ -9,7 +9,7 @@ data class UserModel (
     val userSafe : Boolean, // 유저 인증
     val userUID : String, // 유저 uid
     val userPosts : List<String>, // 유저 포스트 uid
-    val userCAM : List<String>, // 유저 캠 json path
+    val userCAM : List<ProductCAMModel>, // 유저 캠 json path
     val userMainProduct : List<MainProductModel> // 유저 주 생상품목
 
     )

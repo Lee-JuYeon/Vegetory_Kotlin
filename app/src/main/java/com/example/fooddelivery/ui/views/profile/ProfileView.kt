@@ -35,6 +35,7 @@ fun ProfileView() {
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.Start
     ) {
+        // 유저 정보카드
         Row(
             modifier = Modifier
                 .fillMaxWidth()
@@ -82,38 +83,30 @@ fun ProfileView() {
                     modifier = Modifier
                         .fillMaxHeight()
                 ){
-                    items(Dummy.mainProducts){ model ->
-                        Column(
-                            modifier = Modifier
-                                .fillMaxHeight()
-                                .padding(horizontal = 15.dp)
-                                .background(Color.LightGray)
-                                .clickable {
-
-                                },
-                            verticalArrangement = Arrangement.Center,
-                            horizontalAlignment = Alignment.CenterHorizontally
-                        ) {
-                            Image(
-                                painter = painterResource(model.productImage),
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .size(20.dp, 20.dp)
-                                    .clip(CircleShape)
-                            )
-                            Text(
-                                text = model.productTitle,
-                                color = Color.Black,
-                                maxLines = 1,
-                                fontSize = 15.sp,
-                                fontFamily = FontFamily(Font(R.font.noto_bold))
-                            )
-                            
-                        }
+                    items(Dummy.user.userMainProduct){ model ->
+                        ProductView(
+                            productImage = model.productImage,
+                            productTitle = model.productTitle
+                        )
                     }
                 }
             }
         }
+
+        // 자주 파는 상품
+        LazyRow(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Start,
+            contentPadding = PaddingValues(horizontal = 0.dp),
+            modifier = Modifier
+                .fillMaxHeight()
+        ){
+            items(Dummy.user.userMainProduct){ model ->
+
+            }
+        }
+
+
 
 
     }

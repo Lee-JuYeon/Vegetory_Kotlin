@@ -55,3 +55,39 @@ fun PopupView(
         
     }
 }
+
+/*
+Drag example
+https://developer.android.com/jetpack/compose/gestures?hl=ko
+var offsetX by remember { mutableStateOf(0f) }
+Text(
+    modifier = Modifier
+        .offset { IntOffset(offsetX.roundToInt(), 0) }
+        .draggable(
+            orientation = Orientation.Horizontal,
+            state = rememberDraggableState { delta ->
+                offsetX += delta
+            }
+        ),
+    text = "Drag me!"
+)
+
+Box(modifier = Modifier.fillMaxSize()) {
+    var offsetX by remember { mutableStateOf(0f) }
+    var offsetY by remember { mutableStateOf(0f) }
+
+    Box(
+        Modifier
+            .offset { IntOffset(offsetX.roundToInt(), offsetY.roundToInt()) }
+            .background(Color.Blue)
+            .size(50.dp)
+            .pointerInput(Unit) {
+                detectDragGestures { change, dragAmount ->
+                    change.consumeAllChanges()
+                    offsetX += dragAmount.x
+                    offsetY += dragAmount.y
+                }
+            }
+    )
+}
+ */

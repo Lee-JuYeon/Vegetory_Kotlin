@@ -26,7 +26,6 @@ fun ProductView(
 ) {
     Column(
         modifier = Modifier
-            .fillMaxHeight()
             .padding(horizontal = 15.dp)
             .background(Color.LightGray)
             .clickable {

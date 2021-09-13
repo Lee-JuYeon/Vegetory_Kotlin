@@ -6,13 +6,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
-import androidx.compose.material.Card
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.fooddelivery.ui.customviews.dock.DockView
@@ -20,6 +18,9 @@ import com.example.fooddelivery.ui.customviews.framelayout.FrameLayout
 import com.example.fooddelivery.ui.customviews.idcard.IdCardModel
 import com.example.fooddelivery.ui.customviews.topbar.TopBarView
 import com.example.fooddelivery.ui.theme.FoodDeliveryTheme
+import com.example.fooddelivery.ui.views.main.MainView
+import com.example.fooddelivery.ui.views.profile.ProfileView
+import com.example.fooddelivery.ui.views.recipe.RecipeView
 import com.example.fooddelivery.util.lists.Lists
 
 class MainActivity : ComponentActivity() {
@@ -30,7 +31,7 @@ class MainActivity : ComponentActivity() {
                 // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
-                    color = MaterialTheme.colors.error
+                    color = Color.LightGray
                 ) {
                     MainView()
                 }
@@ -40,7 +41,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun MainView(){
+fun MainView2(){
     BoxWithConstraints {
         this.constraints.maxHeight
         Column(
@@ -48,22 +49,24 @@ fun MainView(){
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxSize()
-                .background(MaterialTheme.colors.primaryVariant)
         ){
             TopBarView(
                 setList = Lists.topBarListMainView,
-                setHeight =  this@BoxWithConstraints.maxHeight / 20 * 1
+                setHeight =  this@BoxWithConstraints.maxHeight
             )
 
             FrameLayout(
-                setHeight = this@BoxWithConstraints.maxHeight / 20 * 17
+                setHeight = this@BoxWithConstraints.maxHeight
             ) {
+                RecipeView()
+//                ProfileView()
 
 
             }
+
             DockView(
                 setList = Lists.dockList,
-                setHeight = this@BoxWithConstraints.maxHeight / 20 * 2
+                setHeight = this@BoxWithConstraints.maxHeight
             )
         }
     }

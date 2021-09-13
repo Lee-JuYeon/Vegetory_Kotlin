@@ -8,6 +8,6 @@ data class PostModel(
     val postUID : String,
     val postDescription : String?,
     val postMedia : List<String>,
-    val postLike : List<String>,
+    val postLikeUID : List<String>,
     val postReplyUID : List<String>
 )

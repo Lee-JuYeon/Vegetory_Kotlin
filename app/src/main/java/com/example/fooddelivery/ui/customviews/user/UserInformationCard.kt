@@ -2,7 +2,6 @@ package com.example.fooddelivery.ui.views.profile
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -35,19 +34,15 @@ fun UserInformationCard() {
         Row(
             modifier = Modifier
                 .fillMaxWidth()
-                .height(100.dp)
                 .padding(5.dp),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
             // 유저 셀카
-            ProfileSelfie(
-                setModifier = Modifier
-                    .padding(10.dp)
-                    .size(100.dp, 100.dp)
-                    .clip(RoundedCornerShape(15.dp))
-                    .border(3.dp, MaterialTheme.colors.primaryVariant, RoundedCornerShape(15.dp))
-            )
+            UserSelfie(
+                setLength = 100.dp,
+                setImage = R.drawable.image_email
+               )
             Column(
                 modifier = Modifier
                     .fillMaxWidth()

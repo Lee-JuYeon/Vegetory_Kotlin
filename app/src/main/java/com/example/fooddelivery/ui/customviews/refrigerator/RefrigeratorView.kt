@@ -3,26 +3,32 @@ package com.example.fooddelivery.ui.views.main
 import android.widget.GridLayout
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.GridCells
 import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TransformOrigin
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.fooddelivery.R
+import com.example.fooddelivery.ui.customviews.gridview.CustomGridView
 
 @Composable
 fun RefrigeratorView() {
@@ -80,17 +86,6 @@ fun RefrigeratorView() {
                 }
         ) {
             Text(
-                text = "배지토리 냉장고",
-                modifier = Modifier
-                    .width(width = refrigeratorWidth)
-                    .background(Color.Red)
-                    .align(Alignment.CenterHorizontally),
-                color = Color.Black,
-                maxLines = 1,
-                fontSize = 20.sp,
-                fontFamily = FontFamily(Font(R.font.kotra_bold))
-            )
-            Text(
                 text = "왼쪽으로 밀어서 냉장고 열기",
                 modifier = Modifier
                     .width(width = refrigeratorWidth)
@@ -114,6 +109,8 @@ fun RefrigeratorView() {
                 }
 //                .alpha(alpha.value)
         ){
+            RefrigeratorInnerView(refrigeratorWidth, refrigeratorHeight)
+
             RefrigeratorDoorView(refrigeratorWidth, refrigeratorHeight)
         }
     }
@@ -124,12 +121,27 @@ fun RefrigeratorDoorView(
     setWidth : Dp,
     setHeight : Dp
 ){
-    Column(
+    Image(
+        painter = painterResource(R.drawable.sample_refrigerator_door),
+        contentDescription = null,
         modifier = Modifier
-            .background(Color.Green)
-            .size(width = setWidth, height = setHeight)
-    ) {
+            .size(setWidth, setHeight),
+        contentScale = ContentScale.FillBounds
+    )
+}
 
+@Composable
+fun RefrigeratorInnerView(
+    setWidth : Dp,
+    setHeight : Dp
+){
+    CustomGridView(
+        cols = 2,
+        list = listOf("1", "2", "3", "4",),
+        colModifier = Modifier
+            .size(setWidth, setHeight)
+    ) {
+        Text(text = it)
     }
 }
 

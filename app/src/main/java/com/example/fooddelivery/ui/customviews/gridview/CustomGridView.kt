@@ -1,34 +1,77 @@
 package com.example.fooddelivery.ui.customviews.gridview
 
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
+import androidx.compose.foundation.lazy.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.example.fooddelivery.ui.customviews.scrollview.ScrollableColumn
 
-@Composable
-fun <T> CustomGridViews(
-    list : List<T>
-){
-    for (item in list){
-        Row(
-            modifier = Modifier,
-            horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-
-        }
-
-    }
+enum class AXIS{
+    VERTICAL, HORIZONTAL
 }
 
 @Composable
 fun <T> CustomGridView(
+    dataModelList : List<T>,
+    axis : AXIS = AXIS.VERTICAL,
+    divide : Int,
+    hasFixed : Boolean = true,
+    modifier : Modifier,
+    contentPadding : PaddingValues = PaddingValues(0.dp),
+    viewHolder: @Composable (dataModal: T) -> Unit
+){
+
+    when(axis){
+        AXIS.VERTICAL -> {
+            val rows = (dataModelList.size / divide) + ( if (dataModelList.size % divide > 0) 1 else 0)
+
+            for (r in 0 until rows) {
+                Row(
+                    horizontalArrangement = Arrangement.Center,
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    for (cell in 0 until divide) {
+                        val i = (r * divide) + cell
+                        if (i < dataModelList.size) {
+                            viewHolder(dataModelList[i])
+                        } else {
+                            break
+                        }
+                    }
+                }
+            }
+        }
+        AXIS.HORIZONTAL -> {
+//            LazyRow(
+//                modifier = modifier,
+//                state = rememberLazyListState(),
+//                contentPadding = contentPadding
+//            ) {
+//                items(list) { rowIndex ->
+//                    Column {
+//                        for (columnIndex in 0 until divideLine) {
+//                            val itemIndex = rowIndex * divideLine + columnIndex
+//                            if (itemIndex < scope.totalSize) {
+//                                Box(
+//                                    modifier = Modifier.weight(1f, fill = true),
+//                                    propagateMinConstraints = true
+//                                ) {
+//                                    scope.contentFor(itemIndex, this@items).invoke()
+//                                }
+//                            } else {
+//                                Spacer(Modifier.weight(1f, fill = true))
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+        }
+    }
+}
+
+@Composable
+fun <T> CustomGridViews(
     cols: Int = 1,
                        list: List<T>,
                        rowModifier: Modifier = Modifier,

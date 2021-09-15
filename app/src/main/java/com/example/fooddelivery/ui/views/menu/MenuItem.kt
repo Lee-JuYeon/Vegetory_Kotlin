@@ -13,6 +13,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.AlignmentLine
+import androidx.compose.ui.layout.VerticalAlignmentLine
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
@@ -28,6 +30,7 @@ fun MenuItem(
 ) {
     Box(
         modifier = Modifier
+            .fillMaxWidth()
             .padding(5.dp)
             .clip(RoundedCornerShape(CornerSize(5.dp)))
             .background(Color.White)

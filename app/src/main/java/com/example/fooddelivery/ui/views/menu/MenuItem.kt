@@ -30,7 +30,6 @@ fun MenuItem(
 ) {
     Box(
         modifier = Modifier
-            .fillMaxWidth()
             .padding(5.dp)
             .clip(RoundedCornerShape(CornerSize(5.dp)))
             .background(Color.White)

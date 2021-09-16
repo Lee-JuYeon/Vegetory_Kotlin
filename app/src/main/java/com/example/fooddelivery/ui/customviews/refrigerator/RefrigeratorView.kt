@@ -1,42 +1,37 @@
-package com.example.fooddelivery.ui.views.main
+package com.example.fooddelivery.ui.customviews.refrigerator
 
-import android.widget.GridLayout
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.rememberTransformableState
+import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.GridCells
-import androidx.compose.foundation.lazy.LazyVerticalGrid
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.Text
+import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.TransformOrigin
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.Font
-import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.*
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.contentValuesOf
 import com.example.fooddelivery.R
+import com.example.fooddelivery.models.RefrigeratorFoodModel
+import com.example.fooddelivery.ui.customviews.gridview.AXIS
 import com.example.fooddelivery.ui.customviews.gridview.CustomGridView
+import com.example.fooddelivery.ui.customviews.title.TitleView
+import com.example.fooddelivery.util.lists.Lists
 
 @Composable
-fun RefrigeratorView() {
-    val refrigeratorHeight = 300.dp
-    val refrigeratorWidth = 150.dp
-    var isOpen by remember {
-        mutableStateOf(false)
-    }
+fun RefrigeratorView(
+    setWidth: Dp,
+    setHeight : Dp
+) {
+    var isOpen by remember { mutableStateOf(false) }
 
     val alpha = animateFloatAsState(
         targetValue = if (isOpen) 1f else 0f,
@@ -45,143 +40,176 @@ fun RefrigeratorView() {
         )
     )
 
-    val customRotateY = animateFloatAsState(
+    val customRotateYLeftDoor = animateFloatAsState(
         targetValue = if (isOpen) 180f else 360f,
+        animationSpec = tween(
+            durationMillis = 300
+        )
+    )
+    val customRotateYRightDoor = animateFloatAsState(
+        targetValue = if (isOpen) 180f else 0f,
         animationSpec = tween(
             durationMillis = 300
         )
     )
 
     Row(
-        modifier = Modifier
-            .background(
-                color = Color.White
-            )
-            .size(width = refrigeratorWidth * 2, height = refrigeratorHeight),
+        verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-//        Text(
-//            text = "배지토리 냉장고 왼쪽으로 밀어서 냉장고 열기",
-//            modifier = Modifier
-//                .size(width = 150.dp, height = 200.dp)
-//                .width(width = refrigeratorWidth)
-//                .background(Color.Red)
-//                .clickable {
-//                    isOpen = !isOpen
-//                }
-//                .scale(
-//                    scaleX = 1f,
-//                    scaleY = if (isOpen) -1f else 1f
-//                )
-//        )
-        Column(
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.Start,
-            modifier = Modifier
-                .background(Color.White)
-                .size(width = refrigeratorWidth, height = refrigeratorHeight)
-                .clickable {
-                    isOpen = !isOpen
-                }
-        ) {
-            Text(
-                text = "왼쪽으로 밀어서 냉장고 열기",
-                modifier = Modifier
-                    .width(width = refrigeratorWidth)
-                    .background(Color.Yellow)
-                    .align(Alignment.CenterHorizontally),
-                color = Color.Black,
-                maxLines = 1,
-                fontSize = 18.sp,
-                fontFamily = FontFamily(Font(R.font.noto_regular))
+        modifier = Modifier
+            .size(
+                width = setWidth,
+                height =(setHeight / 10) * 4
             )
+    ) {
+        Tool(
+            setModifier = Modifier
+                .fillMaxHeight()
+                .width(setWidth / 4)
+                .padding(3.dp),
+            setChild = {
+                TitleView(
+                    setTitle = "가능한 요리",
+                    setFont = R.font.sujin,
+                    setSize = 20.sp
+                )
+            }
+        )
 
-        }
-        Box(
-            contentAlignment = Alignment.Center,
-            modifier = Modifier
-                .size(width = refrigeratorWidth, height = refrigeratorHeight)
-                .background(Color.Blue)
-                .graphicsLayer {
-                    transformOrigin = TransformOrigin(pivotFractionX = 0f, pivotFractionY = 0.5f)
-                    rotationY = customRotateY.value
+        RefrigeratorContainer(
+            setWidth = setWidth,
+            setHeight = setHeight,
+        ) {
+            DoorLeft(
+                setWidth = setWidth,
+                setHeight = setHeight,
+                setOnClick = {
+                    isOpen = !isOpen
+                },
+                setGraphicLayerScope = {
+                    transformOrigin = TransformOrigin(0.0f, 0.5f)
+                    rotationY = customRotateYLeftDoor.value
                 }
-//                .alpha(alpha.value)
-        ){
-            RefrigeratorInnerView(refrigeratorWidth, refrigeratorHeight)
-
-            RefrigeratorDoorView(refrigeratorWidth, refrigeratorHeight)
+            )
+            DoorRight(
+                setWidth = setWidth,
+                setHeight = setHeight,
+                setOnClick = {
+                    isOpen = !isOpen
+                },
+                setGraphicLayerScope = {
+                    transformOrigin = TransformOrigin(1.0f, 0.5f)
+                    rotationY = customRotateYRightDoor.value
+                }
+            )
         }
     }
 }
-
 @Composable
-fun RefrigeratorDoorView(
-    setWidth : Dp,
-    setHeight : Dp
+fun Tool(
+    setModifier: Modifier,
+    setChild : @Composable ColumnScope.() -> Unit
 ){
-    Image(
-        painter = painterResource(R.drawable.sample_refrigerator_door),
-        contentDescription = null,
-        modifier = Modifier
-            .size(setWidth, setHeight),
-        contentScale = ContentScale.FillBounds
+    Column(
+        verticalArrangement = Arrangement.Top,
+        horizontalAlignment = Alignment.Start,
+        modifier = setModifier,
+        content = setChild
     )
 }
 
 @Composable
-fun RefrigeratorInnerView(
+fun RefrigeratorContainer(
     setWidth : Dp,
-    setHeight : Dp
+    setHeight : Dp,
+    setContent :  @Composable RowScope.() -> Unit
 ){
-    CustomGridView(
-        cols = 2,
-        list = listOf("1", "2", "3", "4",),
-        colModifier = Modifier
-            .size(setWidth, setHeight)
+    Box(
+        modifier = Modifier
+            .size(width = setWidth / 2, height = setHeight)
+            .background(Color.White)
+            .border(2.5.dp, Color.Black, RectangleShape)
     ) {
-        Text(text = it)
+        LazyRow(
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically,
+            contentPadding = PaddingValues(horizontal = 5.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+        ){
+            items(Lists.refrigeratorFoods){ model : RefrigeratorFoodModel ->
+                RefrigeratorFoodItem(
+                    model = model,
+                    setOnClick = { it
+
+                    }
+                )
+            }
+        }
+
+        LazyRow(
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically,
+            contentPadding = PaddingValues(horizontal = 5.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+        ){
+            items(Lists.refrigeratorFoods){ model : RefrigeratorFoodModel ->
+                RefrigeratorFoodItem(
+                    model = model,
+                    setOnClick = { it
+
+                    }
+                )
+            }
+        }
+
+        Row(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(1.dp),
+            content = setContent
+        )
     }
 }
 
-/*
-Column(
-            verticalArrangement = Arrangement.Top,
-            horizontalAlignment = Alignment.Start,
-            modifier = Modifier
-                .background(Color.White)
-                .size(width = refrigeratorWidth * 2, height = refrigeratorHeight)
-                .clickable {
-                    isOpen = !isOpen
-                }
-//                .scale(
-//                    scaleX = 1f,
-//                    scaleY = if (isOpen) -1f else 1f
-//                )
-        ) {
-            Text(
-                text = "배지토리 냉장고",
-                modifier = Modifier
-                    .width(width = refrigeratorWidth)
-                    .background(Color.Red)
-                    .align(Alignment.CenterHorizontally),
-                color = Color.Black,
-                maxLines = 1,
-                fontSize = 20.sp,
-                fontFamily = FontFamily(Font(R.font.kotra_bold))
-            )
-            Text(
-                text = "왼쪽으로 밀어서 냉장고 열기",
-                modifier = Modifier
-                    .width(width = refrigeratorWidth)
-                    .background(Color.Yellow)
-                    .align(Alignment.CenterHorizontally),
-                color = Color.Black,
-                maxLines = 1,
-                fontSize = 18.sp,
-                fontFamily = FontFamily(Font(R.font.noto_regular))
-            )
 
-        }
- */
+
+@Composable
+fun TransformableSample() {
+    var scale by remember { mutableStateOf(1f) }
+    var rotation by remember { mutableStateOf(0f) }
+    var offset by remember { mutableStateOf(Offset.Zero) }
+    val state = rememberTransformableState { zoomChange, offsetChange, rotationChange ->
+        scale *= zoomChange
+        rotation += rotationChange
+        offset += offsetChange
+    }
+    Box(
+        Modifier
+            .graphicsLayer(
+                scaleX = scale,
+                scaleY = scale,
+                rotationZ = rotation,
+                translationX = offset.x,
+                translationY = offset.y
+            )
+            .transformable(state = state)
+            .background(Color.Blue)
+            .fillMaxHeight()
+    )
+}
+
+//        CustomGridView(
+//            dataModelList =  Lists.refrigeratorFoods,
+//            axis = AXIS.VERTICAL,
+//            divide = 2,
+//            hasFixed = true,
+//            modifier = Modifier
+//                .background(Color.White)
+//                .border(2.dp, Color.Black, RectangleShape)
+//                .fillMaxSize(),
+//            contentPadding = PaddingValues(5.dp)
+//        ){ model ->
+//            RefrigeratorFoodItem(model = model)
+//        }

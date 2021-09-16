@@ -4,27 +4,16 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.gestures.rememberTransformableState
-import androidx.compose.foundation.gestures.transformable
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.*
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.core.content.contentValuesOf
 import com.example.fooddelivery.R
-import com.example.fooddelivery.models.RefrigeratorFoodModel
-import com.example.fooddelivery.ui.customviews.gridview.AXIS
-import com.example.fooddelivery.ui.customviews.gridview.CustomGridView
 import com.example.fooddelivery.ui.customviews.title.TitleView
-import com.example.fooddelivery.util.lists.Lists
 
 @Composable
 fun RefrigeratorView(
@@ -124,45 +113,71 @@ fun RefrigeratorContainer(
     setHeight : Dp,
     setContent :  @Composable RowScope.() -> Unit
 ){
-    Box(
+    BoxWithConstraints(
         modifier = Modifier
             .size(width = setWidth / 2, height = setHeight)
-            .background(Color.White)
             .border(2.5.dp, Color.Black, RectangleShape)
     ) {
-        LazyRow(
-            horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.CenterVertically,
-            contentPadding = PaddingValues(horizontal = 5.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-        ){
-            items(Lists.refrigeratorFoods){ model : RefrigeratorFoodModel ->
-                RefrigeratorFoodItem(
-                    model = model,
-                    setOnClick = { it
+        val width = this.maxWidth
+        val height = this.maxHeight
 
-                    }
+        val TOP_INNER_WIDTH = width
+        val TOP_INNER_HEIGHT = (height / 7) * 4
+        val TOP_LEFT_INNER_WIDTH = width / 2
+        val TOP_LEFT_INNER_HEIGHT = (height / 7) * 4
+        val TOP_RIGHT_INNER_WIDTH = width / 2
+        val TOP_RIGHT_INNER_HEIGHT = (height / 7) * 4
+
+        val bottomInnerWidth = width
+        val bottomInnerHeight = (height / 7) * 3
+        val bottomLeftInnerWidth = width / 2
+        val bottomLeftInnerHeight = (height / 7) * 3
+        val bottomRightInnerWidth = width / 2
+        val bottomRightInnerHeight = (height / 7) * 3
+
+        Column(
+            modifier = Modifier
+                .background(Color.White)
+                .fillMaxSize(),
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.Start
+        ) {
+            Row(
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .size(width = TOP_INNER_WIDTH, height = TOP_INNER_HEIGHT)
+            ) {
+                RefrigeratorInnerView(
+                    setWidth = TOP_LEFT_INNER_WIDTH,
+                    setHeight = TOP_LEFT_INNER_HEIGHT,
+                    setInnerType = InnderAxis.BOTTOM_LEFT
+                )
+                RefrigeratorInnerView(
+                    setWidth = TOP_RIGHT_INNER_WIDTH,
+                    setHeight = TOP_RIGHT_INNER_HEIGHT,
+                    setInnerType = InnderAxis.BOTTOM_RIGHT
+                )
+            }
+            Row(
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier
+                    .size(width = bottomInnerWidth, height = bottomInnerHeight)
+            ) {
+                RefrigeratorInnerView(
+                    setWidth = bottomLeftInnerWidth,
+                    setHeight = bottomLeftInnerHeight,
+                    setInnerType = InnderAxis.BOTTOM_LEFT
+                )
+                RefrigeratorInnerView(
+                    setWidth = bottomRightInnerWidth,
+                    setHeight = bottomRightInnerHeight,
+                    setInnerType = InnderAxis.BOTTOM_RIGHT
                 )
             }
         }
 
-        LazyRow(
-            horizontalArrangement = Arrangement.Start,
-            verticalAlignment = Alignment.CenterVertically,
-            contentPadding = PaddingValues(horizontal = 5.dp),
-            modifier = Modifier
-                .fillMaxWidth()
-        ){
-            items(Lists.refrigeratorFoods){ model : RefrigeratorFoodModel ->
-                RefrigeratorFoodItem(
-                    model = model,
-                    setOnClick = { it
-
-                    }
-                )
-            }
-        }
 
         Row(
             modifier = Modifier
@@ -174,6 +189,8 @@ fun RefrigeratorContainer(
 }
 
 
+
+/*
 
 @Composable
 fun TransformableSample() {
@@ -200,16 +217,25 @@ fun TransformableSample() {
     )
 }
 
-//        CustomGridView(
-//            dataModelList =  Lists.refrigeratorFoods,
-//            axis = AXIS.VERTICAL,
-//            divide = 2,
-//            hasFixed = true,
-//            modifier = Modifier
-//                .background(Color.White)
-//                .border(2.dp, Color.Black, RectangleShape)
-//                .fillMaxSize(),
-//            contentPadding = PaddingValues(5.dp)
-//        ){ model ->
-//            RefrigeratorFoodItem(model = model)
-//        }
+
+CustomGridView(
+            dataModelList =  Lists.refrigeratorFoods,
+            axis = AXIS.VERTICAL,
+            divide = 2,
+            hasFixed = true,
+            modifier = Modifier
+                .background(Color.White)
+                .border(2.dp, Color.Black, RectangleShape)
+                .fillMaxSize(),
+            contentPadding = PaddingValues(5.dp)
+        ){ model ->
+            RefrigeratorFoodItem(
+                model = model,
+                setWidth = setWidth / 4,
+                setHeight = setHeight,
+                setOnClick = {
+
+                }
+            )
+        }
+ */

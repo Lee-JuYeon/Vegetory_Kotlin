@@ -1,9 +1,7 @@
-package com.example.fooddelivery.ui.views.splash
+package com.example.fooddelivery.ui.views.partlogin.splash
 
 import android.content.Context
 import android.util.Log
-import androidx.compose.runtime.livedata.observeAsState
-import androidx.compose.runtime.saveable.autoSaver
 import androidx.lifecycle.LifecycleOwner
 import com.example.fooddelivery.server.internet.InternetManager
 

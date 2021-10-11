@@ -5,6 +5,26 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
 class RegisterVM : ViewModel() {
+//    private val _info = MutableLiveData(
+//        mutableMapOf(
+//            "userName" to "",
+//            "userID" to "",
+//            "userIDCheck" to false,
+//            "password" to "",
+//            "passwordCheck" to "",
+//            "email" to "",
+//            "address" to "",
+//            "verifyFarmer" to false,
+//            "verifyUser" to false
+//        )
+//    )
+//    val info : LiveData<MutableMap<String, Any>> = _info
+//    fun editInfo(editKEY : String, editVALUE : Any){
+//        this._info.value?.get(editKEY)
+//    }
+
+
+
     private val _name = MutableLiveData("")
     val name: LiveData<String> = _name
     fun setName(set : String){
@@ -15,6 +35,12 @@ class RegisterVM : ViewModel() {
     val id : LiveData<String> = _id
     fun setID(set : String){
         _id.value = set
+    }
+
+    private val _idCheck = MutableLiveData(false)
+    val idCheck : LiveData<Boolean> = _idCheck
+    fun setIdCheck(set : Boolean){
+        _idCheck.value = set
     }
 
     private val _password = MutableLiveData("")

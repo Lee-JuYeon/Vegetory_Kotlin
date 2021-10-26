@@ -1,4 +1,4 @@
-package com.example.fooddelivery.ui.views.profile
+package com.example.fooddelivery.ui.customviews.user
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

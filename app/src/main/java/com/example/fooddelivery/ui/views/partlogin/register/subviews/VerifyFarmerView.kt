@@ -8,15 +8,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.fooddelivery.R
 import com.example.fooddelivery.ui.theme.Sujin
 
 @Composable
 fun VerifyFarmerView() {
     // Verify Farmer Button
     Text(
-        text = "농부인증",
+        text = stringResource(id = R.string.register_verify_farmer),
         fontFamily = Sujin,
         fontSize = 20.sp,
         modifier = Modifier

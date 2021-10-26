@@ -9,10 +9,12 @@ import androidx.compose.runtime.*
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import com.example.fooddelivery.ui.theme.NotoSansBold
 import com.example.fooddelivery.vm.RegisterVM
+import com.example.fooddelivery.R
 
 @Composable
 fun UserEmailTextField(registerVM : RegisterVM) {
@@ -25,7 +27,7 @@ fun UserEmailTextField(registerVM : RegisterVM) {
         },
         maxLines = 1,
         textStyle = TextStyle(color = Color.Black, fontFamily = NotoSansBold),
-        label = { Text(text = "Email") },
+        label = { Text(text = stringResource(id = R.string.register_hint_email)) },
         colors = TextFieldDefaults.textFieldColors(
             backgroundColor = Color.White,
             cursorColor = Color.LightGray,
@@ -39,3 +41,8 @@ fun UserEmailTextField(registerVM : RegisterVM) {
             .fillMaxWidth()
     )
 }
+/*
+TODO : Email 인증
+
+참고 url :  https://csy7792.tistory.com/209
+ */

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">배지토리</string>
+    <string name="hint_email">이메일</string>
+    <string name="hint_password">비밀번호</string>
+    <string name="button_login">로그인</string>
+    <string name="button_forget_password">비밀번호를 잃어버리셨나요?</string>
+    <string name="button_register">계정이 없으신가요?</string>
+    <string name="register_verify_farmer">농부 인증</string>
+    <string name="register_verify_user">실명 인증</string>
+    <string name="register_set_address">배송지 설정</string>
+    <string name="register_hint_name">이름 (실명으로 작성해주세요)</string>
+    <string name="register_hint_id">아이디 ( 로그인용)</string>
+    <string name="register_id_duplicate_check">중복 확인</string>
+    <string name="register_hint_email">이메일 ( 이메일 인증 )</string>
+    <string name="register_hint_password_detail_explain">비밀번호 ( 숫자, 특수문자, 문자 포함 8-15자)</string>
+    <string name="register_hint_password_verify_detail_explain">비밀번호 확인 ( 숫자, 특수문자, 문자 포함 8-15자)</string>
+    <string name="register_button_success">가입하기</string>
+</resources>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vegitory</string>
+    <string name="button_register">Registrera</string>
+    <string name="button_forget_password">Glöm lösenord?</string>
+    <string name="button_login">Logga in</string>
+    <string name="hint_password">Lösenord</string>
+    <string name="hint_email">E-post</string>
+</resources>

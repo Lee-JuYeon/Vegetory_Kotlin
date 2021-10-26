@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Vegitory</string>
+    <string name="hint_email">Eメール</string>
+    <string name="hint_password">パスワード</string>
+    <string name="button_login">ログイン</string>
+    <string name="button_forget_password">パスワードを忘れましたか？</string>
+    <string name="button_register">登録</string>
+</resources>

@@ -8,6 +8,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.dp
@@ -23,16 +24,7 @@ fun TopBarItemView(
         contentAlignment = Alignment.TopStart
     ){
         Text(
-            text = model.itemNative,
-            color = Color.White,
-            maxLines = 1,
-            fontSize = 25.sp,
-            fontFamily = FontFamily(Font(R.font.kotra_bold)),
-            modifier = Modifier
-                .padding(horizontal = 15.dp)
-        )
-        Text(
-            text = model.itemNative,
+            text = stringResource(id = model.itemNative),
             color = Color.Black,
             maxLines = 1,
             fontSize = 24.sp,

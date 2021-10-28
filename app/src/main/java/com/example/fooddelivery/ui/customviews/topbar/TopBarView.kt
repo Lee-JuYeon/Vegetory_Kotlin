@@ -15,12 +15,14 @@ import com.example.fooddelivery.util.strings.Strings
 @Composable
 fun TopBarView(
     setList : List<TopBarModel>,
-    setHeight : Dp
+    setHeight : Dp,
+    setOnClick : (model : TopBarModel) -> Unit
 ){
     // 메모리 관리가 들어간 lazyColumn
     LazyRow(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Start,
+        reverseLayout = false,
         contentPadding = PaddingValues(horizontal = 0.dp),
         modifier = Modifier
             .fillMaxWidth()
@@ -31,20 +33,7 @@ fun TopBarView(
             TopBarItemView(
                 model = model,
                 setOnClick = { topBarModel ->
-                    when(topBarModel.itemEnglish){
-                        Strings.TOPBAR_NOTICE -> {
-
-                        }
-                        Strings.TOPBAR_SETTING -> {
-
-                        }
-                        Strings.TOPBAR_SUBSCRIBE -> {
-
-                        }
-                        Strings.TOPBAR_UNSUBSCRIBE -> {
-
-                        }
-                    }
+                    setOnClick(topBarModel)
                 }
             )
         }

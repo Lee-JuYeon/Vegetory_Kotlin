@@ -2,7 +2,7 @@ package com.example.fooddelivery.ui.customviews.topbar
 
 enum class TopBarType {
     NOTIFICATION,
-    SETTING,
+    SETTINGS,
     POST,
     EDIT,
     FOLLOW,

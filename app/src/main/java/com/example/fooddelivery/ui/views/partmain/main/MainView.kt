@@ -1,28 +1,18 @@
 package com.example.fooddelivery.ui.views.partmain.main
 
-import android.util.Log
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.gestures.*
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.input.pointer.consumeAllChanges
-import androidx.compose.ui.input.pointer.pointerInput
-import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Popup
 import com.example.fooddelivery.R
+import com.example.fooddelivery.ui.customviews.popup.PopupType
 import com.example.fooddelivery.ui.customviews.popup.PopupView
-import com.example.fooddelivery.ui.customviews.topbar.TopBarModel
 import com.example.fooddelivery.ui.customviews.topbar.TopBarType
 import com.example.fooddelivery.ui.customviews.topbar.TopBarView
+import com.example.fooddelivery.ui.customviews.topbar.popup.notification.NotificationPopup
 import com.example.fooddelivery.util.lists.Lists
 import java.util.*
 
@@ -38,6 +28,10 @@ fun MainView() {
 
         val getLanguage = Locale.getDefault().displayLanguage
 
+        val showPopup = remember { mutableStateOf(false) }
+        val popupTitle = remember { mutableStateOf(0) }
+        val popupType = remember { mutableStateOf( "" ) }
+
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
@@ -49,10 +43,14 @@ fun MainView() {
                 setOnClick = { topBarModel ->
                     when(topBarModel.type) {
                         TopBarType.NOTIFICATION -> {
-
+                            popupTitle.value = R.string.popup_notification
+                            popupType.value = PopupType.NOTIFICATION.rawValue
+                            showPopup.value = true
                         }
-                        TopBarType.SETTING -> {
-
+                        TopBarType.SETTINGS -> {
+                            popupTitle.value = R.string.popup_settings
+                            popupType.value = PopupType.SETTINGS.rawValue
+                            showPopup.value = true
                         }
                         TopBarType.POST -> {
 
@@ -71,7 +69,7 @@ fun MainView() {
             )
 
             Text(
-                text = "PageView",
+                text = getLanguage,
                 modifier = Modifier
                     .height(height = (heightBlock * 17))
                     .background(Color.Blue)
@@ -84,14 +82,20 @@ fun MainView() {
             )
         }
 
-        val showNotificationPopup = remember { mutableStateOf(true) }
         PopupView(
-            isOpen = showNotificationPopup,
+            isOpen = showPopup,
             width = maxWidth,
             height = maxHeight,
-            title = R.string.topbar_notification
+            title = popupTitle.value
         ) {
+            when(popupType.value){
+                PopupType.NOTIFICATION.rawValue -> {
+                    NotificationPopup()
+                }
+                PopupType.SETTINGS.rawValue -> {
 
+                }
+            }
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.fooddelivery.ui.customviews.dock
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
@@ -34,22 +35,21 @@ fun DockItemView(
     setModel : DockModel,
     setColour : Color,
     isSelected : Boolean,
-    setOnClick: (itemIttle : Int) -> Unit
+    setOnClick: (String) -> Unit
 ){
-    val isExpandable = remember { mutableStateOf(false) }
 
     Row(
         modifier= Modifier
             .clip(RoundedCornerShape(corner = CornerSize(10.dp)))
             .background(
-                if (isSelected){
+                if (isSelected) {
                     Color.Green.copy(alpha = 0.1f)
                 } else {
                     Color.Transparent
                 }
             )
             .clickable {
-                setOnClick(setModel.itemTitle)
+                setOnClick(setModel.itemID)
             }
             .animateContentSize(
                 animationSpec = tween(
